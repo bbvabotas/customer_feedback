@@ -36,7 +36,7 @@
                             enabled: false
                         },
                         xAxis: {
-                            categories: ['1 Rating', '2 Rating', '3 Rating', '4 Rating', '5 Rating']
+                            categories: ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars']
                         },
                         yAxis: {
                             visible: true,
@@ -73,13 +73,13 @@
                             data: [90, 12, 8, 22, 118]
                         }]
                     });
-                } else {
+                } else if(chart_id == 'wf_performance_issues') {
                     Highcharts.chart(chart_id, {
                         title: {
-                            text: 'Technical Issues Trend for past 5 weeks' 
+                            text: 'Performance Issues Trend for past 5 weeks' 
                         },
                         subtitle: {
-                            text: 'number of reviews that had technical issues'  
+                            text: 'number of reviews that mention performance issues'  
                         },
                         tooltip: {
                             enabled: false
@@ -98,12 +98,62 @@
                             bar: {
                                 groupPadding: 0.1,
                                 dataLabels: {
-                                    enabled: true,
-                                    formatter: function(){
-                                        if(this.y > 0){
-                                            return this.y
-                                        }
-                                    }
+                                    enabled: true
+//                                    formatter: function(){
+//                                        if(this.y > 0){
+//                                            return this.y
+//                                        }
+//                                    }
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: true
+                        },
+                        credits: {enabled:false},
+                        series: [{
+                            name: 'Android',
+                            type: 'bar',
+    //                            color: "#bcdaf5",
+                            data: [1, 4, 2, 2, 2]
+                        },{
+                            name: 'iOS',
+                            type: 'bar',
+    //                            color: "gray",
+                            data: [0, 2, 8, 2, 1]
+                        }]
+                    });
+                } else {
+                    Highcharts.chart(chart_id, {
+                        title: {
+                            text: 'Technical Issues Trend for past 5 weeks' 
+                        },
+                        subtitle: {
+                            text: 'number of reviews that mention technical issues'  
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        xAxis: {
+    //                            categories: ['Jul 30 to Aug 5', 'Jul 30 to Aug 5', 'Jul 16 to Jul 22', 'Jul 9 to Jul 15', 'Jul 2 to Jul 8']
+                            categories: ['Last week', 'Last two weeks', 'Last three weeks', 'Last four weeks', 'Last five weeks']
+                        },
+                        yAxis: {
+                            visible: true,
+                            title: {
+                                text: ''
+                            }
+                        },
+                        plotOptions: {
+                            bar: {
+                                groupPadding: 0.1,
+                                dataLabels: {
+                                    enabled: true
+//                                    formatter: function(){
+//                                        if(this.y > 0){
+//                                            return this.y
+//                                        }
+//                                    }
                                 }
                             }
                         },

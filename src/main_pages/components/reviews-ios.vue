@@ -4,7 +4,7 @@
             
             
             <div class="col-sm-8">
-                <table class="table table-striped" style="width:100%">
+                <table class="table table-striped" style="width:100%; border-bottom: 1px solid #e6e6e6;">
                     <thead>
                         <tr>
                             <th class="table_date">Date</th>

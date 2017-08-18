@@ -2,14 +2,9 @@
 <div>
     
     <div class="row">
-        <div class="col-sm-4">
-            
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-12">
             <h2>App Name</h2>
-        </div>
-        <div class="col-sm-4">
-            Search: <input type="text">
+            App Search: <input type="text">
         </div>
     </div>
     <hr>
@@ -62,12 +57,13 @@
             <div class="col-sm-3">
                 <word-frequency-graph class="word_frequency_graph" word_frequency_id="wf_tech_issues"></word-frequency-graph>
             </div>
-            <div class="col-sm-3">
-                <word-frequency-graph class="word_frequency_graph" word_frequency_id="wf_tech_issues2"></word-frequency-graph>
-            </div>
             <div class="col-sm-6">
                 <word-frequency-graph class="word_frequency_graph" word_frequency_id="review_rating_comparison"></word-frequency-graph>
             </div>
+            <div class="col-sm-3">
+                <word-frequency-graph class="word_frequency_graph" word_frequency_id="wf_performance_issues"></word-frequency-graph>
+            </div>
+            
 <!--
             <div class="col-sm-3">
                 <word-frequency-graph word_frequency_id="wf_tech_issues4"></word-frequency-graph>

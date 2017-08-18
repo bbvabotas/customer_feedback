@@ -132,7 +132,7 @@
                             },{
                                 linkedTo:':previous',
                                 yAxis: 1,
-                                name: 'Android Review Count',
+                                name: 'Android Rating Count',
                                 type: 'column',
                                 color: "#7cb5ec",
                                 data: [20, 28, 30, 18, 135, 28, 32, 30, 54, 48]
@@ -145,7 +145,7 @@
                             },{
                                 linkedTo:':previous',
                                 yAxis: 1,
-                                name: 'iOS Review Count',
+                                name: 'iOS Rating Count',
                                 type: 'column',
                                 color: "black",
                                 data: [40, 20, 20, 8, 25, 18, 22, 178, 42, 45]

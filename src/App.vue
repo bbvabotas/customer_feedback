@@ -9,17 +9,33 @@
                 <div><img :src="images.logoSrc" /></div>
             </li>
             <li>
-                <router-link active-class="active-page" to="/app-comparison">
-                    <div><i class="fa fa-globe fa-2x"></i><br>App Comparison</div>
-                </router-link>
+                <div>
+                    <router-link active-class="active-page" to="/app_comparison">
+                        <div><i class="fa fa-globe fa-2x"></i><br>App Comparison</div>
+                    </router-link>
+                </div>
+                
             </li>
             <li>
-                <router-link active-class="active-page" to="/customer-feedback">
-                    <div><i class="fa fa-comments-o fa-2x"></i><br>Customer Feedback</div>
-                </router-link>
+                <div>
+                    <router-link active-class="active-page" to="/customer_feedback">
+                        <div><i class="fa fa-comments-o fa-2x"></i><br>Customer Feedback</div>
+                    </router-link>
+                </div>
+                
+            </li>
+            <li>
+                <div>
+                    <router-link active-class="active-page" to="/mobile_download">
+                        <div><i class="fa fa-mobile fa-2x"></i><br>Mobile Download</div>
+                    </router-link>
+                </div>
+                
             </li>
             
         </ul>
+        
+        
 
     </div>
     <router-view></router-view>
@@ -60,7 +76,6 @@
     .nav_main a:hover {
 /*        color: #b6bec8;*/
         color: white;
-        text-decoration: none;
     }
 
     .nav_main {
