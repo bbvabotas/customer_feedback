@@ -1,11 +1,17 @@
 <template>
 <div>
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <h2>App Name</h2>
-            App Search: <input type="text">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+    <div>
+        <h2>{{ appName }}</h2>
+        <div style="position: relative">
+            App Search: <input v-on:focus="toggleSearchAppList" v-on:blur="toggleSearchAppList" type="text" style="width: 200px;" name="query" v-model="query">
+            <div v-if="show_app_list" class="search_app">
+                <ul v-for="item in searchAppFilter">
+                    <li v-on:click="changeAppName(item.app)">{{ item.app }}</li>
+                </ul>
+            </div>
         </div>
+        
     </div>
     <hr>
     
@@ -23,23 +29,28 @@
         
         <div class="row">
             <div class="col-sm-6">
-                <div>
-                    <img class="icon_size" :src="icons.iconAndroid">
+                <div class="rating_border">
+                    <div style="font-size: 2em">
+                        <img class="icon_size" :src="icons.iconAndroid"> Android
+                    </div>
+                    <div>
+                        <all-time-rating :rating_data="androidData"></all-time-rating>
+                    </div>
                 </div>
-                <div>
-                    <all-time-rating :rating_data="androidData"></all-time-rating>
-                </div>
-
             </div>
             <div class="col-sm-6">
-                <div>
-                    <img class="icon_size" :src="icons.iconIOS">
+                <div class="rating_border">
+                    <div style="font-size: 2em">
+                        <img class="icon_size" :src="icons.iconIOS"> iOS
+                    </div>
+                    <div>
+                        <all-time-rating :rating_data="iosData"></all-time-rating>
+                    </div>
                 </div>
-                <div>
-                    <all-time-rating :rating_data="iosData"></all-time-rating>
-                </div>
+                
             </div>
         </div>
+        
         <div class="row">
             <div class="col-sm-12">
                 <all-time-rating-trend></all-time-rating-trend>
@@ -87,38 +98,22 @@
         </div>
         
         <div class="row">
-            <div class="col-sm-12">
-                <img class="icon_size" :src="icons.iconAndroid">
+            <div class="col-sm-12" style="font-size: 2em">
+                <img class="icon_size" :src="icons.iconAndroid"> Android
             </div>
         </div>
         <div class="row">
-<!--
-            <div class="col-sm-8">
-                <reviews-android class="review_table"></reviews-android>
-            </div>
-            <div class="col-sm-4">
-                word frequency
-            </div>
--->
             <div class="col-sm-12">
                 <reviews-android class="review_table"></reviews-android>
             </div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12">
-                <img class="icon_size" :src="icons.iconIOS">
+            <div class="col-sm-12" style="font-size: 2em">
+                <img class="icon_size" :src="icons.iconIOS"> iOS
             </div>
         </div>
         <div class="row">
-<!--
-            <div class="col-sm-4">
-                word frequency
-            </div>
-            <div class="col-sm-8">
-                <reviews-ios class="review_table"></reviews-ios>
-            </div>
--->
             <div class="col-sm-12">
                 <reviews-ios class="review_table"></reviews-ios>
             </div>         
@@ -148,6 +143,15 @@
                     iconAndroid: require("assets/img/icon_android.png"),
                     iconIOS: require("assets/img/icon_ios.svg")
                 },
+                show_app_list: false,
+                query: '',
+                appList: [
+                    {app:'Argentina Mobile'},{app:'Chile Mobile'},{app:'Colombia Mobile'},{app:'Mexico Mobile'},{app:'Paraguay Mobile'},
+                    {app:'Peru Mobile'},{app:'Spain Mobile'},{app:'Turkey Mobile'},{app:'US Mobile'},{app:'Venezuela Mobile'},
+                    {app:'Chile Wallet'}, {app:'Colombia Wallet'}, {app:'Mexico Wallet'}, {app:'Peru Wallet'}, {app:'Spain Wallet'},
+                    {app:'Turkey Wallet'}, {app:'US Wallet'}
+                ],
+                appName: 'Argentina Mobile',
                 showUI: false,
                 androidData: {},
                 iosData: {}
@@ -156,7 +160,29 @@
         mounted(){
             this.getData()  
         },
+        computed: {
+            searchAppFilter: function () {
+                return this.searchApps(this.query)
+            }
+        },
         methods: {
+            toggleSearchAppList(){
+                setTimeout(()=>{
+                    this.show_app_list = !this.show_app_list  
+                }, 200)
+            },
+            searchApps(value){
+                let search_regex = new RegExp(value, "i"),
+                    list = this.appList;
+                
+                return list.filter(function (item) {
+                    return item.app.match(search_regex);                                                
+                });
+            },
+            changeAppName(name){
+                this.appName = name
+                this.query = ''
+            },
             dateRange(){
                 let start = moment().subtract(1, 'weeks').day(0),
                     end = moment().subtract(1, 'weeks').day(6);
@@ -172,8 +198,7 @@
                     ranges: {
                        'Today': [moment(), moment()],
                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                       'Last 7 Days': [moment().subtract(7, 'days'), moment()],
-                       'Last 30 Days': [moment().subtract(30, 'days'), moment()],
+                       'Last Week': [moment().subtract(1, 'weeks').day(0), moment().subtract(1, 'weeks').day(6)],
                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
                     startDate: start,
@@ -248,9 +273,10 @@
         margin: 40px 0;
     }
     .icon_size {
-        height: 60px;
+        height: 120px;
         padding: 4px;
         margin: 0 10px;
+        vertical-align: middle;
     }
     .date_range_wrapper {
         background: #fff;
@@ -262,7 +288,38 @@
         margin: auto;
         
     }
+    .rating_border {
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        padding: 20px 0;
+    }
     .word_frequency_graph {
         padding: 0 20px;
+    }
+    .search_app {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        margin-left: -60px;
+        background-color: white;
+        border: 1px solid gray;
+        z-index: 100;
+    }
+    .search_app ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+    .search_app ul li {
+        padding: 20px 10px;
+    }
+    .search_app ul li:nth-child(even) {
+        background-color: lightgray;
+    }
+    .search_app ul li:hover {
+        cursor: pointer;
+        background-color: #072146;
+        color: white;
     }
 </style>

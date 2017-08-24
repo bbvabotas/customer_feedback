@@ -1,13 +1,15 @@
 <template>
     <div>
        
+<!--
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div id="android_breakdown_graph" style="height:200px;"></div>
             </div>
         </div>
+-->
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
 <!--
                 <div class="row">
                     <div class="col-sm-6">
@@ -48,10 +50,10 @@
 -->
                 <div class="row">
                     <div class="col-sm-6">
-                        <div style="text-align:left"><i class="fa fa-download fa-2x export_button" title="Download to CSV" @click="exportDataToCSV()"></i></div>
+                        <div class="comments_search">Search Comments: <input style="width:200px;" type="text" name="query" v-model="query"></div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="comments_search">Search Comments: <input style="width:200px;" type="text" name="query" v-model="query"></div>
+                        <div style="text-align:right"><i class="fa fa-download fa-2x export_button" title="Download to CSV" @click="exportDataToCSV()"></i></div>
                     </div>
                 </div>
                 <div class="row">
@@ -89,22 +91,26 @@
                 </div>
             </div>
             
-            <div class="col-sm-4">
-                <div style="padding:100px 0;">
+            <div class="col-sm-6">
+                <div>
+                    <div id="android_breakdown_graph" style="height:250px;"></div>
+                </div>
+                <div>
                     <div>
-                        <div class="highlight_words">
-                            <div>
-                                <input type="checkbox"> Highlight words in reviews    
-                            </div>
-                        </div>
+                        
                         <div class="word_frequency_graph">
-                            <div id="android_word_frequency" style="height:300px"></div>    
+                            <div id="android_word_frequency" style="height:250px"></div>    
                         </div>
 
                     </div>
                     <div>
                         <div class="edit_word_wrapper">
-                            <button class="btn btn-default">Edit Words</button>    
+                            <div class="highlight_words">
+                                <div>
+                                    <input type="checkbox"> Highlight word frequency in reviews    
+                                </div>
+                            </div> 
+                            <button class="btn btn-default">Edit Words</button>
                         </div>
                         <div class="custom_word_wrapper">
                             <div>Add custom word to search for:</div>
@@ -305,13 +311,19 @@
                 
                 Highcharts.chart('android_breakdown_graph', {
                     title: {
-                        text: ''
+                        text: 'Android Ratings'
                     },
                     subtitle: {
-                        text: 'Android Rating within date range'
+                        text: 'android rating within date range'
                     },
                     xAxis: {
-                        categories: ['Total Ratings', 'Rating with Reviews']
+                        categories: ['Total Ratings', 'Rating with Reviews'],
+                        plotLines: [{
+                            color: 'gray',
+                            width: 3,
+                            value: 0.5,
+                            zIndex: 10
+                        }]
                     },
                     yAxis: [{
                         title: {
@@ -387,10 +399,10 @@
             wordFrequency(){
                 Highcharts.chart('android_word_frequency', {
                     title: {
-                        text: '' 
+                        text: 'Word Frequency' 
                     },
                     subtitle: {
-                        text: 'Word frequency for ratings 1 - 2 with review count'  
+                        text: 'word frequency for ratings 1 - 2 with review count'  
                     },
                     colors: ['black', 'orange', 'orange', 'orange', 'orange', 'orange'],
                     tooltip: {
@@ -553,7 +565,7 @@
     }
     
     .highlight_words {
-        text-align: right;
+        text-align: left;
         margin: 10px 0;
     }
     
@@ -563,6 +575,7 @@
     }
     .edit_word_wrapper {
         float: left;
+        text-align: left;
         margin: 10px 0;
     }
     .custom_word_wrapper {
@@ -580,7 +593,7 @@
     
     .comments_search {
         width: 100%;
-        text-align: right;
+        text-align: left;
         font-size: 0.9em;
         margin: 10px 0;
     }

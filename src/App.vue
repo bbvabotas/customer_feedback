@@ -2,7 +2,7 @@
   <div id="app">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+    
     <div>
         <ul class="nav_main">
             <li>
@@ -35,14 +35,13 @@
             
         </ul>
         
-        
-
     </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+    
     export default {
         name: 'app',
         data() {
@@ -55,7 +54,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -74,7 +73,7 @@
     }
 
     .nav_main a:hover {
-/*        color: #b6bec8;*/
+        text-decoration: none;
         color: white;
     }
 

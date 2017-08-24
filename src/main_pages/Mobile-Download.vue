@@ -14,7 +14,7 @@
         
         <div class="row">
             <div>
-                Download the mobile version of the App Comparison / Customer Feedback dashboard so that you can see the dashboard anytime and anywhere on your phone
+                Download the mobile version of the App Comparison / Customer Feedback dashboard from this page so that you can see the dashboard anytime and anywhere on your phone
             </div>
         </div>
         

@@ -31,7 +31,8 @@
                     setTimeout(() => {
                         Highcharts.chart('trend_graph', {
                             title: {
-                                text: 'Rating Trend for past 10 weeks' 
+                                text: 'Android and iOS Rating Trend for past 10 weeks' 
+                                //text: ''
                             },
                             subtitle: {
                                 text: 'ratings are with and without reviews'  
@@ -53,7 +54,7 @@
                                         style: {
                                             fontSize: '10px'
                                         },
-                                        text: "Android release <br> Jun 26"
+                                        text: "Android update <br> Jun 26"
                                     },
                                     zIndex: 10
                                 },{
@@ -69,7 +70,7 @@
                                         style: {
                                             fontSize: '10px'
                                         },
-                                        text: "iOS release <br> Jul 15"
+                                        text: "iOS update <br> Jul 15"
                                     },
                                     zIndex: 10
                                 }],

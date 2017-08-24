@@ -13,8 +13,7 @@
             <ul class="app_compare">
                 <li :class="{ active_comparison: highlightCompetitors }" @click="showCompetitors">Competitor App Ratings</li>
                 <li :class="{ active_comparison: highlightBBVA }" @click="showBBVA">BBVA App Ratings</li>
-                <li>Opiniator</li>
-                <li>NPS</li>
+                <li :class="{ active_comparison: highlightNPS }" @click="showNPS">NPS</li>
             </ul>
         </div>
         <div class="col-sm-10">
@@ -44,6 +43,7 @@
                 showLoading: true,
                 highlightCompetitors: false,
                 highlightBBVA: false,
+                highlightNPS: false,
                 activeGraph: 'competitors',
                 graphData: []
             }
@@ -62,6 +62,12 @@
                     this.getData()
                 } 
             },
+            showNPS(){
+                if(this.activeGraph != 'NPS'){
+                    this.activeGraph = 'NPS'
+                    this.getData()
+                } 
+            },
             getData(){
                 let this_vm = this
                 let data_name = this.activeGraph
@@ -69,14 +75,15 @@
                 this.showLoading = true
                 this.highlightCompetitors = false
                 this.highlightBBVA = false
+                this.highlightNPS = false
                 
                 if(data_name == 'competitors'){
                     this.highlightCompetitors = true
                 } else if(data_name == 'BBVA'){
                     this.highlightBBVA = true
+                } else if(data_name == 'NPS'){
+                    this.highlightNPS = true
                 }
-                
-                
                 
                 setTimeout(() => {
                     
@@ -145,6 +152,68 @@
                             }]
                         },{
                             title: 'BBVA Wallet App Comparison',
+                            categories: ['Chile', 'Colombia', 'Mexico', 'Peru', 'Spain', 'Turkey', 'US'],
+                            series: [{
+                                name: 'Android',
+                                type: 'line',
+                                color: "#7cb5ec",
+                                zIndex: 10,
+                                data: [3.8, 4.0, 2.8, 4.5, 3.8, 4.2, 4.0]
+                            },{
+                                linkedTo:':previous',
+                                yAxis: 1,
+                                name: 'Android Review Count',
+                                type: 'column',
+                                color: "#bcdaf5",
+                                data: [28, 30, 18, 35, 28, 32, 40]
+                            },{
+                                name: 'iOS',
+                                type: 'line',
+                                zIndex: 10,
+                                color: "black",
+                                data: [2.8, 3.0, 1.8, 3.5, 2.8, 3.2, 3.0]
+                            },{
+                                linkedTo:':previous',
+                                yAxis: 1,
+                                name: 'iOS Review Count',
+                                type: 'column',
+                                color: "gray",
+                                data: [20, 20, 8, 25, 18, 22, 20]
+                            }]
+                        }]
+                    } else if(data_name == 'NPS'){
+                        this_vm.graphData = [{
+                            title: 'BBVA Mobile NPS Comparison',
+                            categories: ['Argentina', 'Chile', 'Colombia', 'Mexico', 'Paraguay', 'Peru', 'Spain', 'Turkey', 'US', 'Venezuela'],
+                            series: [{
+                                name: 'Android',
+                                type: 'line',
+                                color: "#7cb5ec",
+                                zIndex: 10,
+                                data: [3.8, 4.0, 2.8, 4.5, 3.8, 4.2, 4.0, 3.2, 3.3, 4.5]
+                            },{
+                                linkedTo:':previous',
+                                yAxis: 1,
+                                name: 'Android Review Count',
+                                type: 'column',
+                                color: "#bcdaf5",
+                                data: [28, 30, 18, 35, 28, 32, 80, 32, 33, 45]
+                            },{
+                                name: 'iOS',
+                                type: 'line',
+                                zIndex: 10,
+                                color: "black",
+                                data: [2.8, 3.0, 1.8, 3.5, 2.8, 3.2, 3.0, 2.2, 2.3, 3.5]
+                            },{
+                                linkedTo:':previous',
+                                yAxis: 1,
+                                name: 'iOS Review Count',
+                                type: 'column',
+                                color: "gray",
+                                data: [20, 20, 8, 25, 18, 22, 40, 32, 33, 45]
+                            }]
+                        },{
+                            title: 'BBVA Wallet NPS Comparison',
                             categories: ['Chile', 'Colombia', 'Mexico', 'Peru', 'Spain', 'Turkey', 'US'],
                             series: [{
                                 name: 'Android',

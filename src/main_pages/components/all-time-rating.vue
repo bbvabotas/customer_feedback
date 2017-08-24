@@ -1,5 +1,5 @@
 <template>
-   
+   <div>
         <div class="row">
             <div class="col-sm-3" style="text-align:center;">
                 <div style="font-size: 5em">
@@ -54,7 +54,7 @@
             </div>
         </div>    
    
-    
+    </div>
 </template>
 
 <script>
